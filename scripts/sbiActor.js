@@ -12,6 +12,8 @@ export class sbiActor {
         this.armor = null;                          // ArmorData
         this.abilities = [];                        // NameValueData[]
         this.alignment = null;                      // string
+        this.about = null;                          // string
+        this.public = null;                         // string
         this.bonusActions = [];                     // NameValueData[]
         this.challenge = null;                      // ChallengeData
         this.features = [];                         // NameValueData[]
@@ -64,6 +66,7 @@ export class sbiActor {
         await this.setMinorActions(Blocks.reactions.id);
         await this.setGear();
         await this.setArmor();
+        this.setBio();
         this.setDamagesAndConditions();
         await this.setFeatures();
         this.setHealth();
@@ -722,6 +725,15 @@ export class sbiActor {
                 this.addItem(item);
             }
         }
+    }
+
+    setBio() {
+        this.set5eProperty(
+            "system.details.biography.value",
+            this.about?.trim().replace(/(?:\r\n|\r|\n)/g, '<br />'));
+        this.set5eProperty(
+            "system.details.biography.public",
+            this.public?.trim().replace(/(?:\r\n|\r|\n)/g, '<br />'));
     }
 
     setChallenge() {
