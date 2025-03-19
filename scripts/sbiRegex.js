@@ -2,9 +2,11 @@ export class sbiRegex {
     // Regexes for checking known types of lines. They have to be written carefully 
     // so that it matches on the line we care about, but not any other random line
     // that happens to start with same the word(s).
+    // Each of these must match one of the keys of Blocks for it to be used when parsing.
     static armor = /^((armor|armour) class|ac)[\s:]+\d+/i;
     static actions = /^actions$/i;
     static abilities = /^(\bstr\b|\bdex\b|\bcon\b|\bint\b|\bwis\b|\bcha\b|\bMod\s+Save\b)/i;
+    static about = /^(about|info|details)[\s:]*$/i;
     static bonusActions = /^bonus actions$/i;
     static challenge = /^(challenge|\bcr\b|challenge rating)[\s:]+\d+/i;
     static conditionImmunities = /^condition\simmunities[\s:]+/i;
@@ -23,6 +25,7 @@ export class sbiRegex {
     // Proficiency Bonus isn't normally used because Foundry calculates it automatically, but could be useful if somehow CR info is missing.
     // It's often in the Challenge line, but it could be separate, so it's also here.
     static proficiencyBonus = /^proficiency bonus[\s:]+\+/i;
+    static public = /^public(\s(info|details))?[\s:]*$/i;
     // The racial details line is here instead of below because it doesn't have a 
     // standard starting word, so we have to look at the whole line.
     static racialDetails = /^(?<size>\bfine\b|\bdiminutive\b|\btiny\b|\bsmall\b|\bmedium\b|\blarge\b|\bhuge\b|\bgargantuan\b|\bcolossal\b)(\sor\s\w+)?(\sswarm of (?<swarmSize>\w+))?\s(?<type>\w+)([,\s]+\((?<race>[,\w\s]+)\))?([,\s]+(?<alignment>[\w\s\-]+))?/idg;
@@ -49,6 +52,8 @@ export class sbiRegex {
     static armorDetails = new RegExp(String.raw`(?<ac>(?<=\s)\d+)(\s\((?<armorType>[^)]+)\))?(\s+Initiative\s${this.initiativeDetailsBase})?`, "idg");
     static proficiencyBonusBase = String.raw`(?:pb|proficiency\sbonus)\s\+?(?<pb>\d+)`;
     static proficiencyBonusDetails = new RegExp(this.proficiencyBonusBase, "idg");
+    static bioDetails = new RegExp(String.raw`^(?:(?:about|info|details)[\s:]+)\s?(?<details>\w+.*)`, "idgs")
+    static bioPublicDetails = new RegExp(String.raw`^(?:public(?:\s(?:info|details))?[\s:]+)\s?(?<details>\w+.*)`, "idgs")
     static challengeDetails = new RegExp(String.raw`(?<cr>(?:½|[\d\/]+))\s?(?<role>[A-Za-z]+)?\s?(?:\(?(?:(?<xp>[\d,]+)\s?xp|xp\s(?<experiencePoints>[\d,]+))(?:\W+${this.proficiencyBonusBase})?)?`, "idg");
     static gearDetails = /(?<=gear|,)\s?(?<name>\w+(?:\s\w+)*)(?:\s?\((?<quantity>\d+)\))?/idg;
     static perDayBase = String.raw`(?<perDay>\d+)\/day`;

@@ -1,7 +1,9 @@
 export const Blocks = {
+    // Each of these keys must match a member of sbiRegex to be parsed.
     abilities: {id: "abilities", name: "Abilities", top: true},
     actions: {id: "actions", name: "Actions"},
     armor: {id: "armor", name: "Armor", top: true},
+    about: { id: "about", name: "Details" },
     bonusActions: {id: "bonusActions", name: "Bonus Actions"},
     challenge: {id: "challenge", name: "Challenge", top: true},
     conditionImmunities: {id: "conditionImmunities", name: "Condition Immunities", top: true},
@@ -19,6 +21,7 @@ export const Blocks = {
     mythicActions: {id: "mythicActions", name: "Mythic Actions"},
     name: {id: "name", name: "Name"},
     proficiencyBonus: {id: "proficiencyBonus", name: "Proficiency Bonus", top: true},
+    public: { id: "public", name: "Public" },
     racialDetails: {id: "racialDetails", name: "Racial Details", top: true},
     reactions: {id: "reactions", name: "Reactions"},
     savingThrows: {id: "savingThrows", name: "Saving Throws", top: true},

@@ -29,6 +29,8 @@ export class sbiParser {
     }
 
     static getFirstMatch(line, excludeIds = []) {
+        // For each key in Blocks other than "name" and "features", find the first match of sbiRegex[key].
+        // If the keys from Blocks don't match the regex strings from sbiRegex, this won't work.
         return Object.keys(Blocks).filter(b => !["name", "features"].includes(b)).find(b => line.match(sRegex[b]) && !excludeIds.includes(b));
     }
 
@@ -130,6 +132,9 @@ export class sbiParser {
                     case Blocks.armor.id:
                         this.parseArmor(blockData);
                         break;
+                    case Blocks.about.id:
+                        this.parseBioDetails(blockData);
+                        break;
                     case Blocks.challenge.id:
                         this.parseChallenge(blockData);
                         break;                    
@@ -155,6 +160,9 @@ export class sbiParser {
                         break;
                     case Blocks.proficiencyBonus.id:
                         this.parseProficiencyBonus(blockData);
+                        break;
+                    case Blocks.public.id:
+                        this.parseBioPublic(blockData);
                         break;
                     case Blocks.racialDetails.id:
                         this.parseRacialDetails(blockData);
@@ -306,6 +314,18 @@ export class sbiParser {
         if (!match) return;
         
         this.actor.initiative = {mod: parseInt(match.groups.initiativeModifier), score: parseInt(match.groups.initiativeScore)};
+    }
+
+    static parseBioDetails(lines) {
+        const match = this.matchAndAnnotate(lines, sRegex.bioDetails)?.[0];
+        if (!match) return;
+        this.actor.about = match.groups.details?.trim();
+    }
+
+    static parseBioPublic(lines) {
+        const match = this.matchAndAnnotate(lines, sRegex.bioPublicDetails)?.[0];
+        if (!match) return;
+        this.actor.public = match.groups.details?.trim();
     }
 
     static parseChallenge(lines) {
