@@ -81,6 +81,7 @@ export class sbiActor {
         this.setSenses();
         this.setSpeed();
         this.setSouls();
+        this.setSource();
     }
 
     set5eProperty(path, value) {
@@ -981,8 +982,14 @@ export class sbiActor {
         this.addItem(itemData);
     }
 
+    setSource() {
+        if (!this.source) return;
+        this.set5eProperty("system.source.book", this.source.book);
+        this.set5eProperty("system.source.page", this.source.page);
+    }
+
     setSpeed() {
-        const walkSpeed = this.speeds.find(s => s.name.toLowerCase() === "speed");
+        const walkSpeed = this.speeds.find(s => s.name.toLowerCase() === "walk");
         const otherSpeeds = this.speeds.filter(s => s != walkSpeed);
         if (otherSpeeds.length) {
             this.set5eProperty("system.attributes.movement", {

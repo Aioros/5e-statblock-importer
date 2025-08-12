@@ -193,6 +193,9 @@ export class sbiParser {
                     case Blocks.skills.id:
                         this.parseSkills(blockData);
                         break;
+                    case Blocks.source.id:
+                        this.parseSource(blockData);
+                        break;
                     case Blocks.speed.id:
                         this.parseSpeed(blockData);
                         break;
@@ -605,12 +608,22 @@ export class sbiParser {
         this.actor.skills = matches.map(m => new NameValueData(m.groups.name, m.groups.modifier));
     }
 
+    static parseSource(lines) {
+        const match = this.matchAndAnnotate(lines, sRegex.sourceDetails)?.[0];
+        if (!match) return;
+
+        this.actor.source = {book: match.groups.book};
+        if (match.groups.page) {
+            this.actor.source.page = match.groups.page;
+        }
+    }
+
     static parseSpeed(lines) {
         const matches = this.matchAndAnnotate(lines, sRegex.speedDetails);
         if (!matches) return;
 
         const speeds = matches
-            .map(m => new NameValueData(m.groups.name, m.groups.value))
+            .map(m => new NameValueData(m.groups.name || "walk", m.groups.value))
             .filter(nv => nv.name != null && nv.value != null);
         
         if (lines.some(l => l.line.toLowerCase().includes("hover"))) {

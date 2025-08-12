@@ -36,6 +36,7 @@ jobs:
         with:
           draft: false
           prerelease: false
+          make_latest: false
           target_commitish: develop
           tag_name: ${{ steps.get_version.outputs.FULLVERSION }}
           name: ${{ steps.get_version.outputs.FULLVERSION }}

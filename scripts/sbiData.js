@@ -25,6 +25,7 @@ export const Blocks = {
     senses: {id: "senses", name: "Senses", top: true},
     skills: {id: "skills", name: "Skills", top: true},
     souls: {id: "souls", name: "Souls", top: true},
+    source: {id: "source", name: "Source", top: true},
     speed: {id: "speed", name: "Speed", top: true},
     traits: {id: "traits", name: "Traits"},
     utilitySpells: {id: "utilitySpells", name: "Utility Spells"},

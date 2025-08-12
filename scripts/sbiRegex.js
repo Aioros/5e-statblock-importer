@@ -32,8 +32,9 @@ export class sbiRegex {
     static senses = /^senses( passive)?(.+\d+\s\bft\b)?/i;
     static skills = /^skills.+[\+-]\d+/i;
     static souls = /^souls[\s:]+\d+/i;
-    static speed = /^speed[\s:]+\d+\s?ft/i;
-    static traits = /^(special\s)?traits$/i;
+    static source = /^source[\s:]+/i;
+    static speed = /^speed[\s:]+(\w+\s+)?\d+\s?ft/i;
+    static traits = /^(special\s)?(traits|abilities)$/i;
     static utilitySpells = /^utility spells$/i;
     static villainActions = /^villain actions$/i;
 
@@ -64,7 +65,8 @@ export class sbiRegex {
     static savingThrowDetails24 = new RegExp(String.raw`(?<saveAbility>\w+)\s(?<saveText>saving throw):\s*dc\s(?<saveDc>\d+)(?:.*${this.conditionBase})?(?:.*success:\s(?<halfDamage>\bhalf\b))?`, "idgs");
     static sensesDetails = /(?<name>\w+) (?<modifier>\d+)/idg;
     static skillDetails = /(?<name>\bacrobatics\b|\barcana\b|\banimal handling\b|\bathletics\b|\bdeception\b|\bhistory\b|\binsight\b|\bintimidation\b|\binvestigation\b|\bmedicine\b|\bnature\b|\bperception\b|\bperformance\b|\bpersuasion\b|\breligion\b|\bsleight of hand\b|\bstealth\b|\bsurvival\b) (?<modifier>[\+|-]\d+)/idg;
-    static speedDetails = /(?<name>\w+)\s?(?<value>\d+)/idg;
+    static speedDetails = /(?:(?<=[^\w])(?<name>\w+)[\s:]+)?(?<value>\d+)/idg;
+    static sourceDetails = /source[\s:]+(?<book>(.(?!,?\s+(?:page|pag|pg|p)\.?\s?(\d+)))+.)(,?\s+(?:page|pag|pg|p)\.?\s?(?<page>\d+))?/idg;
     static spellcastingDetails = /spellcasting\sability\sis\s(?<ability>\w+)|(?<innateAbility>\w+)\sas\sthe\sspellcasting\sability|spell\ssave\sdc\s(?<saveDc>\d+)|(?<level>\d+)(.+)level\sspellcaster/idg;
 
     // The block title regex is complicated. Here's the breakdown...
