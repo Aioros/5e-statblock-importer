@@ -5,7 +5,7 @@ export class sbiRegex {
     static armor = /^((armor|armour) class|ac)[\s:]+\d+/i;
     static actions = /^actions$/i;
     static abilitiesBase = String.raw`\bstr\b|\bstrength\b|\bdex\b|\bdexterity\b|\bcon\b|\bconstitution\b|\bint\b|\bintelligence\b|\bwis\b|\bwisdom\b|\bcha\b|\bcharisma\b`;
-    static abilities = new RegExp(String.raw`^(${this.abilitiesBase}|\bmod(\s+save\b)?)`, "i");
+    static abilities = new RegExp(String.raw`^(${this.abilitiesBase}|\bmod\b(\s+save\b)?)`, "i");
     static bonusActions = /^bonus actions$/i;
     static challenge = /^(challenge|\bcr\b|challenge rating)[\s:]+\d+/i;
     static conditionImmunities = /^condition\simmunities[\s:]+/i;
@@ -26,7 +26,7 @@ export class sbiRegex {
     static proficiencyBonus = /^proficiency bonus[\s:]+\+/i;
     // The racial details line is here instead of below because it doesn't have a 
     // standard starting word, so we have to look at the whole line.
-    static racialDetails = /^(?<size>\bfine\b|\bdiminutive\b|\btiny\b|\bsmall\b|\bmedium\b|\blarge\b|\bhuge\b|\bgargantuan\b|\bcolossal\b)(\sor\s\w+)?(\sswarm of (?<swarmSize>\w+))?\s(?<type>\w+)([,\s]+\((?<race>[,\w\s]+)\))?([,\s]+(?<alignment>[\w\s\-]+))?/idg;
+    static racialDetails = /^(?<size>\bfine\b|\bdiminutive\b|\btiny\b|\bsmall\b|\bmedium\b|\blarge\b|\bhuge\b|\bgargantuan\b|\bcolossal\b)?(\sor\s\w+)?(\sswarm of (?<swarmSize>\w+))?\b\s?(?<type>[\w\s]+\w)([,\s]+\((?<race>[,\w\s]+)\))?([,\s]+(?<alignment>[\w\s\-]+))?/idg;
     static reactions = /^reactions$/i;
     static savingThrows = /^(saving throws|saves)[\s:]+(\bstr\b|\bdex\b|\bcon\b|\bint\b|\bwis\b|\bcha\b)/i;
     static senses = /^senses( passive)?(.+\d+\s\bft\b)?/i;

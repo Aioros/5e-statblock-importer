@@ -862,7 +862,8 @@ export class sbiActor {
     }
 
     setRacialDetails() {
-        if (!this.size) return;
+        if (!this.size)
+            this.size = "medium";
 
         const getSizeAbbreviation = (size) => {
             switch (size) {
@@ -888,9 +889,12 @@ export class sbiActor {
             this.set5eProperty("system.details.type.swarm", getSizeAbbreviation(swarmSizeValue));
         }
 
-        this.set5eProperty("system.details.alignment", sUtils.capitalizeAll(this.alignment?.trim()));
-        this.set5eProperty("system.details.type.subtype", sUtils.capitalizeAll(this.race?.trim()));
-        this.set5eProperty("system.details.type.value", this.type?.trim().toLowerCase());
+        if (this.alignment)
+            this.set5eProperty("system.details.alignment", sUtils.capitalizeAll(this.alignment.trim()));
+        if (this.race)
+            this.set5eProperty("system.details.type.subtype", sUtils.capitalizeAll(this.race?.trim()));
+        if (this.type)
+            this.set5eProperty("system.details.type.value", this.type?.trim().toLowerCase());
 
         const hasCustomType = this.customType?.trim();
         if (hasCustomType) {
