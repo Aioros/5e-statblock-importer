@@ -23,6 +23,7 @@ export class sbiWindow extends HandlebarsApplicationMixin(ApplicationV2) {
         },
         actions: {
             parse: sbiWindow.parse,
+            reset: sbiWindow.reset,
             import: sbiWindow.import,
             compendiumOptions: sbiWindow.openCompendiumOptions,
         }
@@ -318,6 +319,11 @@ export class sbiWindow extends HandlebarsApplicationMixin(ApplicationV2) {
         } catch (error) {
             sbiUtils.error("An error has occured (" + error.stack.split("\n", 1).join("") + "). Please report it using the module link so it can get fixed.", error);
         }
+    }
+
+    static reset() {
+        document.getElementById("sbi-input").innerHTML = "";
+        document.getElementById("sbi-issues").innerHTML = "";
     }
 
     static async import() {
