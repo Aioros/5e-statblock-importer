@@ -40,7 +40,7 @@ export class sbiUtils {
             .join("\n");
     }
 
-    static getAbilityMod(abilityValue) {
+    static getAbilityMod(abilityValue = 10) {
         return Math.floor((abilityValue - 10) / 2);
     }
 

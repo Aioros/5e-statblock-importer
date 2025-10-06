@@ -694,6 +694,7 @@ export class sbiActor {
     /*** Other Stats */
 
     setAbilities() {
+        this.set5eProperty("system.abilities", {});
         for (const data of this.abilities) {
             const propPath = `system.abilities.${data.name.toLowerCase()}.value`;
             this.set5eProperty(propPath, parseInt(data.value));
@@ -831,7 +832,7 @@ export class sbiActor {
     setInitiative() {
         if (!this.initiative) return;
 
-        const dexterityMod = sUtils.getAbilityMod(this.#dnd5e.system.abilities.dex.value || 10);
+        const dexterityMod = sUtils.getAbilityMod(this.#dnd5e.system.abilities.dex?.value || 10);
         if (dexterityMod !== this.initiative.mod) {
             this.set5eProperty("system.attributes.init.bonus", this.initiative.mod - dexterityMod);
         }

@@ -80,7 +80,9 @@ export class sbiParser {
                     match = hint.blockId;
                 } else {
                     // Get the first block match, excluding the ones we already have
-                    match = this.getFirstMatch(line, [...this.statBlocks.keys()]);
+                    const excludeIds = [...this.statBlocks.keys()]
+                    if (!foundTopBlock) excludeIds.push(Blocks.abilities.id); // We only accept an apparent ability block match if we are still in the top section
+                    match = this.getFirstMatch(line, excludeIds);
                 }
 
                 // This check is a little shaky, but it's the best we can do. We assume that if
