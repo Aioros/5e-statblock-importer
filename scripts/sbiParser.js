@@ -582,7 +582,8 @@ export class sbiParser {
         const match = this.matchAndAnnotate(lines, sRegex.rollDetails)?.[0];
         if (!match) return;
 
-        this.actor[type] = new RollData(parseInt(match.groups.value), match.groups.formula);
+        const formula = match.groups.formula.replace(/[−–]/, "-");
+        this.actor[type] = new RollData(parseInt(match.groups.value), formula);
     }
 
     static parseSavingThrows(lines) {
