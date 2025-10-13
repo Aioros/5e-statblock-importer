@@ -45,7 +45,7 @@ export class sbiUtils {
     }
 
     static getProficiencyBonus(level) {
-        return 2 + Math.floor((level - 1) / 4);
+        return Math.max(2, 2 + Math.floor((level - 1) / 4));
     }
 
     static getMinLevel(proficiencyBonus) {

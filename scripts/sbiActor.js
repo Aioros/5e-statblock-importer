@@ -355,7 +355,6 @@ export class sbiActor {
             foundry.utils.setProperty(itemData, "system.type.value", "natural");
             foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}`, {
                 _id: attackActivityId, type: "attack", activation: {type: "action", value: 1},
-                attack: {ability: sUtils.getAbilityMod(this.#dnd5e.system.abilities.str?.value) > sUtils.getAbilityMod(this.#dnd5e.system.abilities.dex?.value) ? "str" : "dex"}
             });
 
             this.setReach(actionData, itemData);
@@ -366,6 +365,11 @@ export class sbiActor {
             if (attackAbility === "spellcasting") {
                 attackAbility = this.#dnd5e.system.attributes?.spellcasting;
             }
+
+            if (!attackAbility) {
+                attackAbility = sUtils.getAbilityMod(this.#dnd5e.system.abilities.str?.value) > sUtils.getAbilityMod(this.#dnd5e.system.abilities.dex?.value) ? "str" : "dex";
+            }
+
             const attackAbilityValue = this.#dnd5e.system.abilities[attackAbility]?.value || 10;
             const calculatedToHit = sUtils.getAbilityMod(attackAbilityValue) + sUtils.getProficiencyBonus(this.#dnd5e.system.details.cr);
             if (calculatedToHit != actionData.value.attack.toHit) {
@@ -632,7 +636,6 @@ export class sbiActor {
             foundry.utils.setProperty(itemData, "system.range.units", "ft");
             
             let attackActivityId = Object.values(itemData.system.activities).find(a => a.type == "attack")._id;
-            foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}.attack.ability`, "dex");
             foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}.attack.type.value`, "ranged");
 
             if (actionData.value.type === "spell") {
@@ -644,11 +647,10 @@ export class sbiActor {
 
     setReach(actionData, itemData) {
         if (actionData.value.reach) {
-            foundry.utils.setProperty(itemData, "system.range.value", actionData.value.reach);
+            foundry.utils.setProperty(itemData, "system.range.reach", actionData.value.reach);
             foundry.utils.setProperty(itemData, "system.range.units", "ft");
 
             let attackActivityId = Object.values(itemData.system.activities).find(a => a.type == "attack")._id;
-            foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}.attack.ability`, "str");
             foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}.attack.type.value`, "melee");
 
             if (actionData.value.type === "spell") {
@@ -741,9 +743,9 @@ export class sbiActor {
     }
 
     setChallenge() {
-        if (this.challenge?.cr) {
+        if (Object.hasOwn(this.challenge ?? {}, "cr")) {
             this.set5eProperty("system.details.cr", this.challenge.cr);
-        } else if (this.challenge?.pb) {
+        } else if (this.challenge?.pb > 0) {
             this.set5eProperty("system.details.cr", sUtils.getMinLevel(this.challenge.pb));
         } else {
             this.set5eProperty("system.details.cr", 0);
