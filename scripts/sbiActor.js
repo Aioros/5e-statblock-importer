@@ -361,7 +361,7 @@ export class sbiActor {
             this.setRange(actionData, itemData);
 
             // Some monsters have attacks where the hit bonus doesn't match the modifier. That includes rarer cases of spell attacks on creatures without a spellcasting feature.
-            let attackAbility = itemData.system.activities[attackActivityId].attack.ability;
+            let attackAbility = itemData.system.activities[attackActivityId].attack?.ability;
             if (attackAbility === "spellcasting") {
                 attackAbility = this.#dnd5e.system.attributes?.spellcasting;
             }
