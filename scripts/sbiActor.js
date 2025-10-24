@@ -886,8 +886,13 @@ export class sbiActor {
             }
         };
 
-        const sizeValue = this.size.toLowerCase();
+        let sizeValue = this.size.toLowerCase();
         const swarmSizeValue = this.swarmSize?.toLowerCase();
+
+        if (["fine", "diminutive"].includes(sizeValue))
+            sizeValue = "tiny";
+        if (sizeValue === "colossal")
+            sizeValue = "gargantuan";
 
         this.set5eProperty("system.traits.size", getSizeAbbreviation(sizeValue));
 

@@ -2,7 +2,7 @@
     "id": "5e-statblock-importer",
     "title": "5e Statblock Importer",
     "description": "Import monster and NPC statblocks for D&D 5e",
-    "version": "2.3.8",
+    "version": "2.3.9",
     "compatibility": {
         "minimum": "12.331",
         "verified": "14.349"
@@ -26,7 +26,7 @@
                 "compatibility": {
                     "minimum": "4.3.0",
                     "maximum": "5.999",
-                    "verified": "5.1.9"
+                    "verified": "5.1.10"
                 }
             }
         ]
@@ -39,5 +39,5 @@
     ],
     "url": "https://github.com/Aioros/5e-statblock-importer",
     "manifest": "https://raw.githubusercontent.com/Aioros/5e-statblock-importer/main/module.json",
-    "download": "https://github.com/Aioros/5e-statblock-importer/releases/download/v2.3.8/5e-statblock-importer-v2.3.8.zip"
+    "download": "https://github.com/Aioros/5e-statblock-importer/releases/download/v2.3.9/5e-statblock-importer-v2.3.9.zip"
 }
