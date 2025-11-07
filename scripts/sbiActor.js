@@ -424,7 +424,7 @@ export class sbiActor {
             }
             if (activity === "attack" && hasDamageMod) {
                 // Some monsters have attacks where the damage doesn't match the modifier.
-                let attackAbility = itemData.system.activities[activityId].attack.ability;
+                let attackAbility = itemData.system.activities[activityId].attack?.ability;
                 if (!attackAbility) {
                     attackAbility = sUtils.getAbilityMod(this.#dnd5e.system.abilities.str?.value) > sUtils.getAbilityMod(this.#dnd5e.system.abilities.dex?.value) ? "str" : "dex";
                 }
