@@ -1,0 +1,28 @@
+<div class="container">
+    <div>
+        <h3>Spell Compendiums</h3>
+        <ul id="cbi-spell-compendiums">
+            {{#each compendiums.spells}}
+                <li class="form-group">
+                    <label>
+                        <input type="checkbox" data-id="{{collection}}" {{#if active}}checked{{/if}} {{#if disabled}}disabled{{/if}} />
+                        {{title}}
+                    </label>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div>
+        <h3>Item Compendiums</h3>
+        <ul id="cbi-item-compendiums">
+            {{#each compendiums.items}}
+                <li class="form-group">
+                    <label>
+                        <input type="checkbox" data-id="{{collection}}" {{#if active}}checked{{/if}} />
+                        {{title}}
+                    </label>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

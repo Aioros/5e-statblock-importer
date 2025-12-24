@@ -1,0 +1,175 @@
+body {
+    --matched-color: #000099;
+    --matched-hover-color: #0011ff;
+    --line-hover-bg-color: #aaa;
+    &.theme-dark {
+        --matched-color: #e7d1b1;
+        --matched-hover-color: #ffc064;
+        --line-hover-bg-color: #555;
+    }
+}
+
+#cbi-window .window-content > form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#cbi-top label {
+    flex: 0;
+    flex-basis: 80px;
+}
+
+#cbi-top .form-fields {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+#cbi-main-button {
+    width: 97%;
+    height: 28px;
+}
+
+#cbi-bottom {
+    display: flex;
+    gap: 5px;
+}
+
+#cbi-import-text {
+    align-self: center;
+}
+
+#cbi-import-select {
+    width: 33%;
+    align-self: center;
+}
+
+#cbi-import-button {
+    width: 33%;
+    margin-left: auto;
+}
+
+#cbi-input {
+    margin-bottom: 5px;
+    overflow: auto;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 4px 8px;
+    white-space: pre-wrap;
+    flex: 1;
+    position: relative;
+}
+
+#cbi-input:empty::before {
+    content: attr(data-placeholder);
+    color: gray;
+}
+
+#cbi-input .block-container {
+    position: relative;
+    border-top: 1px solid rgba(128, 128, 128, 0.5);
+    padding: 8px 0;
+}
+
+#cbi-input .block-container::before {
+    content: attr(data-block-name);
+    position: absolute;
+    font-size: smaller;
+    font-weight: bold;
+    opacity: 0.5;
+    right: 0;
+    text-align: right;
+}
+
+#cbi-input .block-container.drag-over {
+    background-color: var(--line-hover-bg-color);
+}
+
+#cbi-input .line-container {
+    cursor: grab;
+}
+
+#cbi-input .line-container:hover {
+    background-color: var(--line-hover-bg-color);
+}
+
+#cbi-input span.hint::before {
+    content: 'Hint: ' attr(data-block-name);
+    font-size: smaller;
+    font-weight: bold;
+    opacity: 0.5;
+    margin: 8px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 0 4px;
+    cursor: pointer;
+}
+
+#cbi-input span {
+    position: relative;
+    cursor: text;
+}
+
+#cbi-input span span.matched {
+    display: inline;
+    text-decoration: underline;
+    color: var(--matched-color);
+}
+
+#cbi-input span span.matched:hover {
+    color: var(--matched-hover-color);
+}
+
+#cbi-tooltip {
+    visibility: hidden;
+    min-width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px 8px;
+    position: absolute;
+}
+
+#cbi-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+#cbi-compendium-options-menu {
+    .container {
+        display: flex;
+        & > * {
+            flex: 1;
+        }
+    }
+    footer {
+        display: flex;
+    }
+}
+
+.cbi-issue {
+    border: 1px solid var(--color-level-warning);
+    border-radius: 4px;
+    background: rgba(214, 150, 0, 0.8);
+    margin: 4px 0;
+    padding: 4px;
+    a {
+        text-decoration: underline;
+    }
+}
+
+#cbi-compendium-options-menu .form-group label:hover {
+    cursor: move;
+}
+
+.cbi-dialog .line-text {
+    display: block;
+    font-style: italic;
+}

@@ -1,0 +1,24 @@
+<form class="standard-form">
+    <section id="cbi-top">
+        <div class="form-group">
+            <label for="cbi-import-autoparse">Auto parse:</label>
+            <div class="form-fields">
+                <input id="cbi-import-autoparse" type="checkbox" checked="checked" />
+                <button id="cbi-import-parse" type="button" data-action="parse">Parse</button>
+            </div>
+            <button id="cbi-import-reset" type="button" data-action="reset">Reset</button>
+        </div>
+    </section>
+    <div id="cbi-input" contenteditable="true" data-placeholder="Usage:
+- Paste the full class description text into this box. It should follow D&D 5e formatting to be imported correctly. Markdown is supported too.
+- You can click on the &quot;Parse&quot; button above to preview all the information that the module is able to parse from the text (the &quot;Auto Parse&quot; checkbox will automatically do that for you after every change).
+- If you need to, you can edit the text here to fix any errors. The &quot;Import&quot; button below will parse and create the class based on the current text.
+
+Report any bugs using the module link, and add the class description you were trying to import."></div>
+    <section id="cbi-issues"></section>
+    <section id="cbi-bottom">
+        <span id="cbi-import-text">Folder to import to:</span>
+        <select id="cbi-import-select"></select>
+        <button id="cbi-import-button" type="button" data-action="import">Import</button>
+    </section>
+</form>

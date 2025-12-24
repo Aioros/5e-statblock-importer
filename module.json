@@ -32,10 +32,12 @@
         ]
     },
     "esmodules": [
-        "./scripts/sbi.js"
+        "./scripts/sbi.js",
+        "./scripts/cbi.js"
     ],
     "styles": [
-        "./styles/sbi.css"
+        "./styles/sbi.css",
+        "./styles/cbi.css"
     ],
     "url": "https://github.com/Aioros/5e-statblock-importer",
     "manifest": "https://raw.githubusercontent.com/Aioros/5e-statblock-importer/main/module.json",
