@@ -372,7 +372,7 @@ export class sbiActor {
 
             const attackAbilityValue = this.#dnd5e.system.abilities[attackAbility]?.value || 10;
             const calculatedToHit = sUtils.getAbilityMod(attackAbilityValue) + sUtils.getProficiencyBonus(this.#dnd5e.system.details.cr);
-            if (calculatedToHit != actionData.value.attack.toHit) {
+            if (actionData.value.attack.toHit && calculatedToHit != actionData.value.attack.toHit) {
                 foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}.attack.flat`, true);
                 foundry.utils.setProperty(itemData, `system.activities.${attackActivityId}.attack.bonus`, parseInt(actionData.value.attack.toHit));
             }

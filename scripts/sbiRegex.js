@@ -101,7 +101,7 @@ export class sbiRegex {
     static abilityValues24 = /(?<base>\d+)\s?(?<modifier>[\+\-−–]?\d+)\s?(?<saveModifier>[\+\-−–]?\d+)/dg;
     static actionCost = /\((costs )?(?<cost>\d+) action(s)?\)/idg;
     static attack = new RegExp(String.raw`\+(?<toHit>\d+)\sto\shit\b(?:(?:.(?!dc\s\d+))*${this.conditionBase})?`, "idgs");
-    static attack24 = new RegExp(String.raw`attack\sroll:\s*\+(?<toHit>\d+)(?:(?:.(?!dc\s\d+))*${this.conditionBase})?`, "idgs");
+    static attack24 = new RegExp(String.raw`attack\sroll:\s*(?:\+(?<toHit>\d+)|bonus equal)(?:(?:.(?!dc\s\d+))*${this.conditionBase})?`, "idgs");
     static castAction = /^(?<featureName>[^.:!]+)[.:!]\s?(?<monsterDesc>(?:\w+\s){1,4})(?:\bcasts|\bcan innately cast|\bspellcasting to cast)\s(?!a\s|one\s\of\s)(?<spellList>.*?),?\s?(?:in response|using|requiring|\.)/idg;
     static castActionSpell = /(?<=^|,|\bor\s)\s?(?:(?:or\s)?(?<spellName>\b(?:[^,.:;](?!or|\())+)(?:\s\(level\s(?<spellLevel>\d+)\sversion\))?)/idg;
     static conditionTypes = new RegExp(this.conditionBase, "idg");
