@@ -629,6 +629,12 @@ export class sbiActor {
         if (actionData.value.perDay) {
             foundry.utils.setProperty(itemData, "system.uses.max", actionData.value.perDay);
             foundry.utils.setProperty(itemData, "system.uses.recovery", [{period: "day", type: "recoverAll"}]);
+            Object.values(itemData.system.activities).forEach(activity => {
+                foundry.utils.setProperty(itemData, `system.activities.${activity._id}.consumption.targets`, [{
+                    type: "itemUses",
+                    value: 1
+                }]);
+            });
         }
     }
 
@@ -665,6 +671,12 @@ export class sbiActor {
 
     setRecharge(actionData, itemData) {
         if (actionData.value.recharge) {
+            Object.values(itemData.system.activities).forEach(activity => {
+                foundry.utils.setProperty(itemData, `system.activities.${activity._id}.consumption.targets`, [{
+                    type: "itemUses",
+                    value: 1
+                }]);
+            });
             foundry.utils.setProperty(itemData, "system.uses", {max: "1", recovery: [{period: "recharge", formula: actionData.value.recharge}]});
         }
     }
