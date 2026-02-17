@@ -629,6 +629,10 @@ export class sbiActor {
         if (actionData.value.perDay) {
             foundry.utils.setProperty(itemData, "system.uses.max", actionData.value.perDay);
             foundry.utils.setProperty(itemData, "system.uses.recovery", [{period: "day", type: "recoverAll"}]);
+            if (!Object.keys(itemData.system.activities ?? {}).length) {
+                let activityId = foundry.utils.randomID();
+                foundry.utils.setProperty(itemData, `system.activities.${activityId}`, {_id: activityId, type: "utility"});
+            }
             Object.values(itemData.system.activities).forEach(activity => {
                 foundry.utils.setProperty(itemData, `system.activities.${activity._id}.consumption.targets`, [{
                     type: "itemUses",
@@ -671,6 +675,10 @@ export class sbiActor {
 
     setRecharge(actionData, itemData) {
         if (actionData.value.recharge) {
+            if (!Object.keys(itemData.system.activities ?? {}).length) {
+                let activityId = foundry.utils.randomID();
+                foundry.utils.setProperty(itemData, `system.activities.${activityId}`, {_id: activityId, type: "utility"});
+            }
             Object.values(itemData.system.activities).forEach(activity => {
                 foundry.utils.setProperty(itemData, `system.activities.${activity._id}.consumption.targets`, [{
                     type: "itemUses",
