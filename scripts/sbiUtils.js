@@ -29,13 +29,14 @@ export class sbiUtils {
     static stripMarkdownAndCleanInput(text) {
         const domParser = new DOMParser();
         const showdownConverter = new showdown.Converter();
-        const html = domParser.parseFromString(showdownConverter.makeHtml(text), "text/html");
+        const modifiedText = text.replace(/\|(:?)-(:?)\|/g, "|$1--$2|"); // Fix issue with table headers needing at least two dashes
+        const html = domParser.parseFromString(showdownConverter.makeHtml(modifiedText), "text/html");
         return html.body.innerText
             .split(/[\n\r]+/g)
             .map(str => str.trim())
             .map(str => str.replace("::", "")) // remove some Homebrewery markdown
             .map(str => str.replace(/\s+/g, " ")) // remove double spaces
-            .filter(str => !str.startsWith("{{") && !str.startsWith("}}") && str !== ":") // remove some other Homebrewery markdown
+            .filter(str => !str.startsWith("{{") && !str.startsWith("}}") && /[^\\\-\_:]*/.test(str)) // remove some other Homebrewery markdown
             .filter(str => str) // remove empty lines
             .join("\n");
     }
