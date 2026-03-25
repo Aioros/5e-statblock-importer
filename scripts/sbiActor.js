@@ -1109,7 +1109,11 @@ export class sbiActor {
                             foundry.utils.setProperty(castActivity, "uses.max", "" + spellObj.count);
                             foundry.utils.setProperty(castActivity, "uses.recovery", [{period: "day", type: "recoverAll"}]);
                         } else {
-                            let mainSpellActivityId = Object.values(spell.system.activities)[0]._id;
+                            let mainSpellActivityId = Object.values(spell.system.activities)[0]?._id;
+                            if (!mainSpellActivityId) {
+                                mainSpellActivityId = foundry.utils.randomID();
+                                spell.system.activities[mainSpellActivityId] = {_id: mainSpellActivityId, type: "utility", activation: {type: "action", value: 1}};
+                            }
                             foundry.utils.setProperty(spell, `system.activities.${mainSpellActivityId}.consumption.targets`, [{
                                 type: "itemUses",
                                 value: 1
